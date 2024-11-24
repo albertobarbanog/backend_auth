@@ -140,7 +140,7 @@ router.get('/readone/:id', getProductById);
  *             example:
  *               name: Laptop
  *               description: Macbook Pro
- *               price:2800
+ *               price: 1800
  *     responses:
  *       200:
  *         description: Producto actualizado con éxito
