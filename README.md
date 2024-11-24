@@ -71,3 +71,11 @@ http://localhost:3000/api-docs
 ```
 
 ---
+
+### **Render.com**
+
+Se subio el proyecto a Render.com, puedes acceder a la API en:
+
+```
+https://backend-auth-ybdz.onrender.com/
+```
