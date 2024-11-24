@@ -67,7 +67,7 @@ Una API RESTful creada con Node.js, Express y MongoDB que permite la autenticaci
 La API cuenta con documentación interactiva generada con Swagger, disponible en:
 
 ```
-http://localhost:3500/api-docs
+http://localhost:3000/api-docs
 ```
 
 ---
