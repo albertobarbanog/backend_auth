@@ -22,11 +22,11 @@ const PORT = process.env.PORT || 3500;
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
-    console.log('Conectado a la base de datos MongoDB');
+    console.log('Conectado a la base de datos');
     app.listen(PORT, () => {
       console.log(`Servidor corriendo en el puerto ${PORT}`);
     });
   })
   .catch((err) => {
-    console.error('Error al conectar a MongoDB:', err);
+    console.error('Error al conectar', err);
   });

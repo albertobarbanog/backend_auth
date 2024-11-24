@@ -1,5 +1,16 @@
 const Product = require('../models/productModel');
 
+// Manejar errores
+const handleError = (
+  res,
+  error,
+  message = 'Ocurrió un error',
+  statusCode = 500
+) => {
+  console.error(error);
+  res.status(statusCode).json({ message, error });
+};
+
 // Crear un producto
 const createProduct = async (req, res) => {
   const { name, description, price, userId } = req.body;
@@ -10,7 +21,7 @@ const createProduct = async (req, res) => {
 
     res.status(201).json({ message: 'Producto creado con éxito', product });
   } catch (error) {
-    res.status(500).json({ message: 'Error al crear el producto', error });
+    handleError(res, error, 'Error al crear el producto');
   }
 };
 
@@ -20,7 +31,7 @@ const getAllProducts = async (req, res) => {
     const products = await Product.find().populate('user', 'name email');
     res.status(200).json(products);
   } catch (error) {
-    res.status(500).json({ message: 'Error al obtener los productos', error });
+    handleError(res, error, 'Error al obtener los productos');
   }
 };
 
@@ -31,12 +42,17 @@ const getProductById = async (req, res) => {
   try {
     const product = await Product.findById(id).populate('user', 'name email');
     if (!product) {
-      return res.status(404).json({ message: 'Producto no encontrado' });
+      return handleError(
+        res,
+        new Error('Producto no encontrado'),
+        'El producto solicitado no existe',
+        404
+      );
     }
 
     res.status(200).json(product);
   } catch (error) {
-    res.status(500).json({ message: 'Error al obtener el producto', error });
+    handleError(res, error, 'Error al obtener el producto');
   }
 };
 
@@ -61,7 +77,7 @@ const updateProduct = async (req, res) => {
       .status(200)
       .json({ message: 'Producto actualizado con éxito', product });
   } catch (error) {
-    res.status(500).json({ message: 'Error al actualizar el producto', error });
+    handleError(res, error, 'Error al actualizar el producto');
   }
 };
 
@@ -79,7 +95,7 @@ const deleteProduct = async (req, res) => {
 
     res.status(200).json({ message: 'Producto eliminado con éxito' });
   } catch (error) {
-    res.status(500).json({ message: 'Error al eliminar el producto', error });
+    handleError(res, error, 'Error al eliminar el producto');
   }
 };
 
